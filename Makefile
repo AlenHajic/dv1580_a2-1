@@ -12,7 +12,7 @@ OBJ = $(SRC:.c=.o)
 all: mmanager list
 
 # Rule to create the dynamic library (memory manager)
-mmanager: $(LIB_NAME)
+mmanager: $(LIB_NAME) 
 
 $(LIB_NAME): $(OBJ)
 	$(CC) -shared -o $@ $(OBJ) $(LDFLAGS)
