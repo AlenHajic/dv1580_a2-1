@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "common_defs.h"
+#include <pthread.h>
 
 #include "gitdata.h"
 

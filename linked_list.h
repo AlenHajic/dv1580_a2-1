@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <stdio.h> //behöver det här för printf
 #include <stddef.h> //behöver det här för size_t
+#include <pthread.h>
 
 //Struct för mina nodes som används i linked_list
 typedef struct Node {
