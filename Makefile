@@ -9,7 +9,7 @@ SRC = memory_manager.c
 OBJ = $(SRC:.c=.o)
 
 # Default target: builds both memory manager and linked list
-all: mmanager list
+all: mmanager list memory
 
 # Rule to create the dynamic library (memory manager)
 mmanager: $(LIB_NAME)
