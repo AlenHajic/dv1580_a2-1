@@ -2,7 +2,7 @@
 CC = gcc
 CFLAGS = -Wall -fPIC
 LDFLAGS = -pthread -lm
-LIB_NAME = libmemory_manager.dll
+LIB_NAME = libmemory_manager.so
 
 # Source and Object Files
 SRC = memory_manager.c
@@ -15,33 +15,33 @@ all: mmanager list
 mmanager: $(LIB_NAME)
 
 $(LIB_NAME): $(OBJ)
-	$(CC) -shared -o $@ $(OBJ) -Wl,--out-implib,libmemory_manager.a $(LDFLAGS)
+	$(CC) -shared -o $@ $(OBJ) $(LDFLAGS)
 
 # Rule to compile source files into object files
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Rule to build the linked list application and link it with libmemory_manager.dll
+# Rule to build the linked list application and link it with libmemory_manager.so
 list: linked_list.o $(LIB_NAME)
 	$(CC) $(CFLAGS) -o test_linked_list linked_list.c test_linked_list.c -L. -lmemory_manager $(LDFLAGS)
-	copy test_linked_list.exe test_linked_listCG.exe
+	cp test_linked_list test_linked_listCG
 
 # Rule to create the test_memory_manager binary
 test_mmanager: mmanager memory_manager.o
 	$(CC) $(CFLAGS) -o test_memory_manager memory_manager.o test_memory_manager.c -L. -lmemory_manager $(LDFLAGS)
-	copy test_memory_manager.exe test_memory_manager_listCG.exe
+	cp test_memory_manager test_memory_manager_listCG
 
 # Run all tests
 run_tests: run_test_mmanager run_test_list
 
 # Run test cases for the memory manager
 run_test_mmanager:
-	./test_memory_manager.exe
+	./test_memory_manager
 
 # Run test cases for the linked list
 run_test_list:
-	./test_linked_list.exe
+	./test_linked_list
 
 # Clean target to clean up build files
 clean:
-	rm -f $(OBJ) $(LIB_NAME) libmemory_manager.a test_memory_manager.exe test_linked_list.exe test_linked_listCG.exe linked_list.o
+	rm -f $(OBJ) $(LIB_NAME) test_memory_manager test_linked_list test_linked_listCG linked_list.o
