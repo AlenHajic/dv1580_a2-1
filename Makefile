@@ -13,8 +13,6 @@ all: mmanager list
 
 # Rule to create the dynamic library (memory manager)
 mmanager: memory_manager.o $(LIB_NAME)
-	$(CC) $(CFLAGS) -o test_memory_manager memory_manager.o test_memory_manager.c -L. -lmemory_manager $(LDFLAGS)
-		cp test_memory_manager test_memory_manager_listCG
 
 $(LIB_NAME): $(OBJ)
 	$(CC) -shared -o $@ $(OBJ) $(LDFLAGS)
