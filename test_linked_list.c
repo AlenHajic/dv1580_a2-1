@@ -4,6 +4,7 @@
 #include <assert.h>
 #include <time.h>
 #include <stddef.h>
+#include <pthread.h>
 
 #include "common_defs.h"
 #include "gitdata.h"
