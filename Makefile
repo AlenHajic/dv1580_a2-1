@@ -12,7 +12,7 @@ OBJ = $(SRC:.c=.o)
 all: mmanager list
 
 # Rule to create the dynamic library (memory manager)
-mmanager: $(LIB_NAME)
+mmanager: test_memory_manager $(LIB_NAME)
 
 $(LIB_NAME): $(OBJ)
 	$(CC) -shared -o $@ $(OBJ) $(LDFLAGS)
@@ -24,13 +24,10 @@ $(LIB_NAME): $(OBJ)
 # Rule to build the linked list application and link it with libmemory_manager.so
 list: test_linked_list
 
-test_linked_list: test_linked_list.o linked_list.o $(LIB_NAME)
+test_linked_list: test_linked_list.o linked_list.o $(LIB_NAME) test:linked_list.c
 	$(CC) $(CFLAGS) -o test_linked_list linked_list.o test_linked_list.o -L. -lmemory_manager $(LDFLAGS)
 	cp test_linked_list test_linked_listCG
 
-# Rule to compile test_linked_list.c into an object file
-test_linked_list.o: test_linked_list.c
-	$(CC) $(CFLAGS) -c test_linked_list.c -o test_linked_list.o
 
 # Rule to create the test_memory_manager binary
 test_mmanager: mmanager memory_manager.o
