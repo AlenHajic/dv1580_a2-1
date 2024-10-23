@@ -9,7 +9,7 @@ SRC = memory_manager.c
 OBJ = $(SRC:.c=.o)
 
 # Default target: builds both memory manager and linked list
-all: mmanager list memory
+all: mmanager list test_mmanager test_list
 
 # Rule to create the dynamic library (memory manager)
 mmanager: $(LIB_NAME) 
@@ -21,27 +21,37 @@ $(LIB_NAME): $(OBJ)
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-memory: test_memory_manager
+mmanager: $(LIB_NAME)
 
-# Rule to build the linked list application and link it with libmemory_manager.so
-list: test_linked_list
+# Build the linked list
+list: linked_list.o
 
-test_linked_list: test_linked_list.o linked_list.o $(LIB_NAME)
-	$(CC) $(CFLAGS) -o test_linked_list linked_list.o test_linked_list.o -L. -lmemory_manager $(LDFLAGS)
+# Test target to run the memory manager test program
+#$(LIB_NAME)
+test_mmanager: $(LIB_NAME)
+	$(CC) $(CFLAGS) -o test_memory_manager test_memory_manager.c -L. -lmemory_manager $(LDFLAGS)
+
+# Test target to run the linked list test program
+#$(LIB_NAME) linked_list.o
+#linked_list.c
+test_list: $(LIB_NAME) linked_list.o
+	$(CC) $(CFLAGS) -o test_linked_list linked_list.c test_linked_list.c -L. -lmemory_manager $(LDFLAGS)
 	cp test_linked_list test_linked_listCG
 
 # Rule to compile test_linked_list.c into an object file
-test_linked_list.o: test_linked_list.c
-	$(CC) $(CFLAGS) -c test_linked_list.c -o test_linked_list.o
+# test_linked_list.o: test_linked_list.c
+# 	$(CC) $(CFLAGS) -c test_linked_list.c -o test_linked_list.o
 
+test_mmanager: $(LIB_NAME)
+	$(CC) $(CFLAGS) -o test_memory_manager test_memory_manager.c -L. -lmemory_manager $(LDFLAGS)
 
-test_memory_manager: test_memory_manager.o memory_manager.o $(LIB_NAME)
-	$(CC) $(CFLAGS) -o test_memory_manager memory_manager.o test_memory_manager.o -L. -lmemory_manager $(LDFLAGS)
-	cp test_memory_manager test_memory_managerCG
+# test_memory_manager: test_memory_manager.o memory_manager.o $(LIB_NAME)
+# 	$(CC) $(CFLAGS) -o test_memory_manager memory_manager.o test_memory_manager.o -L. -lmemory_manager $(LDFLAGS)
+# 	cp test_memory_manager test_memory_managerCG
 
-# Rule to compile test_memory_manager.c into an object file
-test_memory_manager.o: test_memory_manager.c
-	$(CC) $(CFLAGS) -c test_memory_manager.c -o test_memory_manager.o
+# # Rule to compile test_memory_manager.c into an object file
+# test_memory_manager.o: test_memory_manager.c
+# 	$(CC) $(CFLAGS) -c test_memory_manager.c -o test_memory_manager.o
 
 # Run all tests
 run_tests: run_test_mmanager run_test_list
