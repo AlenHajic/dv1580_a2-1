@@ -9,7 +9,7 @@ SRC = memory_manager.c
 OBJ = $(SRC:.c=.o)
 
 # Default target: builds both memory manager and linked list
-all: mmanager list memory
+all: mmanager list
 
 # Rule to create the dynamic library (memory manager)
 mmanager: $(LIB_NAME)
@@ -33,6 +33,7 @@ test_linked_list: test_linked_list.o linked_list.o $(LIB_NAME)
 # Rule to compile test_linked_list.c into an object file
 test_linked_list.o: test_linked_list.c
 	$(CC) $(CFLAGS) -c test_linked_list.c -o test_linked_list.o
+
 
 test_memory_manager: test_memory_manager.o memory_manager.o $(LIB_NAME)
 	$(CC) $(CFLAGS) -o test_memory_manager memory_manager.o test_memory_manager.o -L. -lmemory_manager $(LDFLAGS)
