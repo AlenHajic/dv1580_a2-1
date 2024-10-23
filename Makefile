@@ -21,6 +21,8 @@ $(LIB_NAME): $(OBJ)
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
+memory: test_memory_manager
+
 # Rule to build the linked list application and link it with libmemory_manager.so
 list: test_linked_list
 
