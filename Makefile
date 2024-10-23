@@ -21,7 +21,7 @@ $(LIB_NAME): $(OBJ)
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-memory: test_memory_manager
+# memory: test_memory_manager
 
 # Rule to build the linked list application and link it with libmemory_manager.so
 list: test_linked_list
@@ -39,9 +39,11 @@ test_mmanager: test_memory_manager.o memory_manager.o $(LIB_NAME)
 	$(CC) $(CFLAGS) -o test_memory_manager memory_manager.o test_memory_manager.o -L. -lmemory_manager $(LDFLAGS)
 	cp test_memory_manager test_memory_managerCG
 
-# Rule to compile test_memory_manager.c into an object file
-test_memory_manager.o: test_memory_manager.c
+test_mmanager.o: test_memory_manager.c
 	$(CC) $(CFLAGS) -c test_memory_manager.c -o test_memory_manager.o
+# Rule to compile test_memory_manager.c into an object file
+# test_memory_manager.o: test_memory_manager.c
+# 	$(CC) $(CFLAGS) -c test_memory_manager.c -o test_memory_manager.o
 
 # Run all tests
 run_tests: run_test_mmanager run_test_list
