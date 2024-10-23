@@ -22,11 +22,15 @@ $(LIB_NAME): $(OBJ)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Rule to build the linked list application and link it with libmemory_manager.so
-list: linked_list.o
+list: test_linked_list
 
-test_list: $(LIB_NAME)
-	$(CC) $(CFLAGS) -o test_linked_list linked_list.c test_linked_list.c -L. -lmemory_manager $(LDFLAGS)
+test_linked_list: test_linked_list.o linked_list.o $(LIB_NAME)
+	$(CC) $(CFLAGS) -o test_linked_list linked_list.o test_linked_list.o -L. -lmemory_manager $(LDFLAGS)
 	cp test_linked_list test_linked_listCG
+
+# Rule to compile test_linked_list.c into an object file
+test_linked_list.o: test_linked_list.c
+	$(CC) $(CFLAGS) -c test_linked_list.c -o test_linked_list.o
 
 # Rule to create the test_memory_manager binary
 test_mmanager: mmanager memory_manager.o
@@ -45,4 +49,4 @@ run_test_list:
 
 # Clean target to clean up build files
 clean:
-	rm -f $(OBJ) $(LIB_NAME) test_memory_manager test_linked_list linked_list.o test_linked_listCG
+	rm -f $(OBJ) $(LIB_NAME) test_memory_manager test_linked_list test_linked_list.o linked_list.o test_linked_listCG
