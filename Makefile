@@ -22,7 +22,7 @@ $(LIB_NAME): $(OBJ)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Rule to build the linked list application and link it with libmemory_manager.so
-list: linked_list.o
+list: test_linked_list
 
 test_list: linked_list.o $(LIB_NAME)
 	$(CC) $(CFLAGS) -o test_linked_list linked_list.c test_linked_list.c -L. -lmemory_manager $(LDFLAGS)
