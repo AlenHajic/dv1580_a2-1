@@ -32,12 +32,8 @@ test_linked_list: test_linked_list.o linked_list.o $(LIB_NAME)
 test_linked_list.o: test_linked_list.c
 	$(CC) $(CFLAGS) -c test_linked_list.c -o test_linked_list.o
 
-# Rule to compile linked_list.c into an object file
-linked_list.o: linked_list.c
-	$(CC) $(CFLAGS) -c linked_list.c -o linked_list.o
-
 # Rule to build the test_memory_manager application
-test_memory_manager: test_memory_manager.o memory_manager.o $(LIB_NAME)
+test_mmanager: test_memory_manager.o memory_manager.o $(LIB_NAME)
 	$(CC) $(CFLAGS) -o test_memory_manager memory_manager.o test_memory_manager.o -L. -lmemory_manager $(LDFLAGS)
 	cp test_memory_manager test_memory_managerCG
 
@@ -58,7 +54,4 @@ run_test_list:
 
 # Clean target to clean up build files
 clean:
-	rm -f $(OBJ) $(LIB_NAME) test_memory_manager test_linked_list test_memory_manager.o test_linked_list.o linked_list.o test_linked_listCG test_memory_managerCG
-
-# Declare phony targets
-.PHONY: all mmanager list clean run_tests run_test_mmanager run_test_list
+	rm -f $(OBJ) $(LIB_NAME) test_memory_manager test_linked_list test_linked_list.o linked_list.o test_memory_manager.o test_linked_listCG test_memory_managerCG
