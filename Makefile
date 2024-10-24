@@ -38,13 +38,6 @@ test_list: $(LIB_NAME) linked_list.o
 	$(CC) $(CFLAGS) -o test_linked_list linked_list.c test_linked_list.c -L. -lmemory_manager $(LDFLAGS)
 	cp test_linked_list test_linked_listCG
 
-# Rule to compile test_linked_list.c into an object file
-# test_linked_list.o: test_linked_list.c
-# 	$(CC) $(CFLAGS) -c test_linked_list.c -o test_linked_list.o
-
-test_mmanager: $(LIB_NAME)
-	$(CC) $(CFLAGS) -o test_memory_manager test_memory_manager.c -L. -lmemory_manager $(LDFLAGS)
-
 # test_memory_manager: test_memory_manager.o memory_manager.o $(LIB_NAME)
 # 	$(CC) $(CFLAGS) -o test_memory_manager memory_manager.o test_memory_manager.o -L. -lmemory_manager $(LDFLAGS)
 # 	cp test_memory_manager test_memory_managerCG
