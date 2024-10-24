@@ -1,6 +1,6 @@
 # Compiler and Linking Variables
 CC = gcc
-CFLAGS = -Wall -fPIC -pthread
+CFLAGS = -Wall -fPIC -pthread -lm
 LIB_NAME = libmemory_manager.so
 LDFLAGS = -lm
 
@@ -58,4 +58,4 @@ run_test_list:
 
 # Clean target to clean up build files
 clean:
-	rm -f $(OBJ) $(LIB_NAME) test_memory_manager test_linked_list test_linked_list.o linked_list.o test_memory_manager.o test_linked_listCG test_memory_managerCG
+	rm -f $(OBJ) $(LIB_NAME) test_memory_manager test_linked_list linked_list.o
