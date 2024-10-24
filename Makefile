@@ -1,7 +1,7 @@
 # Compiler and Linking Variables
 CC = gcc
 CFLAGS = -Wall -fPIC -pthread
-LDFLAGS = -lm
+LDFLAGS = -lm -pthreads
 LIB_NAME = libmemory_manager.so
 
 # Source and Object Files
